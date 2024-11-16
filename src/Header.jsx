@@ -1,3 +1,11 @@
+import BackgroundImage from "./BackgroundImage";
+import H1 from "./H1";
+
 export default function Header() {
-	return <div>Header</div>;
+	return (
+		<header>
+			<BackgroundImage />
+			<H1 />
+		</header>
+	);
 }

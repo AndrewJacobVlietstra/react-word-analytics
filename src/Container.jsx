@@ -1,3 +1,11 @@
+import Stats from "./Stats";
+import Textarea from "./Textarea";
+
 export default function Container() {
-	return <div>Container</div>;
+	return (
+		<main className="container">
+			<Textarea />
+			<Stats />
+		</main>
+	);
 }
