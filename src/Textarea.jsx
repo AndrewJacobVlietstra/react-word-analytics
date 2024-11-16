@@ -1,25 +1,34 @@
 import { useState } from "react";
+import Warning from "./Warning";
 
 export default function Textarea() {
 	const [text, setText] = useState("");
+	const [warningText, setWarningText] = useState("");
 
 	const handleTextChange = (e) => {
-		const textValue = e.target.value;
+		let textValue = e.target.value;
 
 		if (textValue.includes("<script>")) {
-			console.error("You cannot use <script> in your text!");
-			return setText("");
+			textValue = textValue.replace("<script>", "");
+			setWarningText("No '<script>' tag allowed!");
+		} else if (textValue.includes("@")) {
+			textValue = textValue.replace("@", "");
+			setWarningText("No '@' symbol allowed!");
+		} else {
+			setWarningText("");
 		}
 		return setText(textValue);
 	};
 
 	return (
-		<textarea
-			onChange={handleTextChange}
-			value={text}
-			className="textarea"
-			placeholder="Enter your text..."
-			spellCheck="false"
-		/>
+		<div className="textarea">
+			<textarea
+				onChange={handleTextChange}
+				value={text}
+				placeholder="Enter your text..."
+				spellCheck="false"
+			/>
+			<Warning warningText={warningText} />
+		</div>
 	);
 }
