@@ -1,8 +1,7 @@
 import { useState } from "react";
 import Warning from "./Warning";
 
-export default function Textarea() {
-	const [text, setText] = useState("");
+export default function Textarea({ text, setText }) {
 	const [warningText, setWarningText] = useState("");
 
 	const handleTextChange = (e) => {
@@ -15,7 +14,7 @@ export default function Textarea() {
 			textValue = textValue.replace("@", "");
 			setWarningText("No '@' symbol allowed!");
 		} else {
-			setWarningText("");
+			warningText && setWarningText("");
 		}
 		return setText(textValue);
 	};
